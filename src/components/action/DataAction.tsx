@@ -1,50 +1,73 @@
 import { Button, IconButton } from '@mui/material'
 import { AddBox, Edit, Delete } from '@mui/icons-material'
-import { ReactNode, useCallback } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
+import { IFormMetaGetter } from '~/meta/types'
+import { ModalForm } from '~/components/form/ModalForm'
 
 export interface IDataActionProps {
-  actionType: 'create' | 'update' | 'remove'
+  actionType: 'CREATE' | 'UPDATE' | 'REMOVE'
   actionText?: string
   action: ActionCreatorWithPayload<any>
-  formMetaGetter?: any
   context?: Record<string, any>
+  formMetaGetter?: IFormMetaGetter
 }
 
-export const DataAction = ({
-  actionType,
-  actionText,
-  action,
-  context,
-}: IDataActionProps) => {
+export const DataAction = ({ actionType, actionText, action, context, formMetaGetter }: IDataActionProps) => {
   const dispatch = useDispatch()
+  const [showDialog, setShowDialog] = useState(false)
 
-  let ariaLabel: string 
+  let ariaLabel: string
   let icon: ReactNode
 
   switch (actionType) {
-    case 'create':
-      ariaLabel = "add"
+    case 'CREATE':
+      ariaLabel = 'add'
       icon = <AddBox />
-      break;
-    case 'update':
-      ariaLabel = "update"
-      icon = <Edit />
-      break;
-    case 'remove':
-      ariaLabel = "remove"
-      icon = <Delete />
-      break;
+      break
+    case 'UPDATE':
+      ariaLabel = 'UPDATE'
+      icon = <Edit color="primary" />
+      break
+    case 'REMOVE':
+      ariaLabel = 'REMOVE'
+      icon = <Delete color="warning" />
+      break
   }
 
-  const handleAction = useCallback(() => {
-    if ((actionType === "remove" && context)) dispatch(action(context.id))
-    else if ((actionType === "create")) dispatch(action(context))
+  const handleClick = useCallback(() => {
+    if (actionType === 'REMOVE' && context) dispatch(action(context.id))
+    else if (actionType === 'CREATE' || actionType === 'UPDATE') setShowDialog(true)
   }, [actionType, action, context, dispatch])
 
   return (
-    actionText ? <Button variant="contained" startIcon={icon} onClick={handleAction}>{actionText}</Button>
-    : <IconButton onClick={handleAction}>{icon}</IconButton>
+    <>
+      {actionText ? (
+        <Button
+          variant="contained"
+          startIcon={icon}
+          onClick={handleClick}
+          color={actionType === 'CREATE' ? 'success' : undefined}
+        >
+          {actionText}
+        </Button>
+      ) : (
+        <IconButton onClick={handleClick}>{icon}</IconButton>
+      )}
+      {formMetaGetter ? (
+        <ModalForm
+          open={showDialog}
+          onClose={() => setShowDialog(false)}
+          formProps={{
+            ...formMetaGetter(),
+            submitAction:
+              actionType === 'CREATE' ? action : (((data) => action({ id: context?.id, data })) as typeof action),
+            onSubmitSuccess: () => setShowDialog(false),
+            defaultValues: context
+          }}
+        />
+      ) : null}
+    </>
   )
 }

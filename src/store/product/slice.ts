@@ -8,7 +8,7 @@ export interface ProductState {
 }
 
 const initialState: ProductState = {
-  list: productList,
+  list: productList
 }
 
 export const productSlice = createSlice({
@@ -16,18 +16,21 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<IProduct>) => {
-      state.list.push(action.payload)
+      state.list = [
+        {
+          id: Date.now(),
+          ...action.payload
+        },
+        ...state.list
+      ]
     },
-    update: (state, action: PayloadAction<{id: string; data: IProduct}>) => {
-      let matchedProduct = state.list.find(i => i.id === action.payload.id)
-      if (matchedProduct) {
-        matchedProduct = action.payload.data
-      }
+    update: (state, action: PayloadAction<{ id: string; data: IProduct }>) => {
+      state.list = state.list.map((i) => (i.id === action.payload.id ? action.payload.data : i))
     },
     remove: (state, action: PayloadAction<string>) => {
-      state.list = state.list.filter(i => i.id !== action.payload)
-    },
-  },
+      state.list = state.list.filter((i) => i.id !== action.payload)
+    }
+  }
 })
 
 export const { add, update, remove } = productSlice.actions
