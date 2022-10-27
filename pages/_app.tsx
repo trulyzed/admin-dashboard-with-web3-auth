@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
+import { appWithTranslation } from 'next-i18next'
 import { Layout } from '~/components/layout/Layout'
 import { useStorage } from '~/hooks/useStorage'
 import { store } from '~/store/store'
@@ -17,4 +18,4 @@ function DashboardApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default DashboardApp
+export default appWithTranslation(DashboardApp)
