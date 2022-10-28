@@ -1,7 +1,7 @@
 @import './variables';
 
 body {
-  background-color: azure;
+  background-color: aliceblue;
   &.--dark-mode {
     background-color: $dark-bg;
   }

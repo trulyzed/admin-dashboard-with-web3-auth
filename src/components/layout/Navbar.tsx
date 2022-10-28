@@ -9,10 +9,10 @@ interface INavbarProps {
 }
 
 export const Navbar = ({ onShowDrawer }: INavbarProps) => {
-  const isMobileView = useMediaQuery('(max-width:320px)')
+  const isMobileView = useMediaQuery('(max-width:375px)')
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" elevation={2}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton
@@ -20,7 +20,7 @@ export const Navbar = ({ onShowDrawer }: INavbarProps) => {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              sx={{ mr: isMobileView ? 1 : 2 }}
+              sx={{ mr: isMobileView ? 0 : 2 }}
               onClick={onShowDrawer}
             >
               <Menu />
@@ -32,14 +32,14 @@ export const Navbar = ({ onShowDrawer }: INavbarProps) => {
                 component="div"
                 sx={{
                   cursor: 'pointer',
-                  letterSpacing: isMobileView ? 2 : 5
+                  letterSpacing: isMobileView ? 1 : 5
                 }}
               >
                 DASHBOARD
               </Typography>
             </Link>
           </Box>
-          <Box sx={{ display: 'flex', gap: 1 }}>
+          <Box sx={{ display: 'flex', gap: isMobileView ? 0 : 1 }}>
             <ThemeToggler />
             <LocaleSwitcher />
           </Box>

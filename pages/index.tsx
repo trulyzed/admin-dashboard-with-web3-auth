@@ -1,14 +1,15 @@
 import type { GetStaticProps, NextPage } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 const Home: NextPage = () => {
+  const { t } = useTranslation('home')
+
   return (
     <div>
       <Head>
-        <title>Dashboard</title>
-        <meta name="description" content="Dashboard web application" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>{t('pageTitle')} | Dashboard</title>
       </Head>
     </div>
   )
@@ -17,7 +18,7 @@ const Home: NextPage = () => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? 'en', ['common', 'menu', 'product']))
+      ...(await serverSideTranslations(locale ?? 'en', ['common', 'menu', 'home']))
     }
   }
 }
