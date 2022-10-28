@@ -10,7 +10,7 @@ import { ThemeToggler } from './layout/ThemeToggler'
 import { useTranslation } from 'next-i18next'
 
 export const Login = () => {
-  const { loading, login } = useContext(AuthContext)
+  const { login } = useContext(AuthContext)
   const { t } = useTranslation('common')
 
   return (
@@ -25,7 +25,8 @@ export const Login = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: 2
+          gap: 2,
+          p: 2
         }}
       >
         <Card sx={{ maxWidth: 345 }}>
@@ -39,7 +40,7 @@ export const Login = () => {
             </Typography>
           </CardContent>
           <CardActions sx={{ my: 3, display: 'flex', justifyContent: 'center' }}>
-            <Button onClick={login} size="medium" color="info" variant="contained" disabled={loading}>
+            <Button onClick={login} size="medium" color="info" variant="contained">
               {t('authentication.login.action')}
             </Button>
           </CardActions>
