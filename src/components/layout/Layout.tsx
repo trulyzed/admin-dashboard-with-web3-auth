@@ -4,7 +4,7 @@ import { SideMenu } from './SideMenu'
 import { Navbar } from './Navbar'
 import { useRouter } from 'next/router'
 import { ThemeProvider } from '~/contexts/Theme'
-import { ProtectedView } from '../ProtectedView'
+import { ProtectedView } from '~/components/ProtectedView'
 
 interface ILayoutProps {
   children: ReactNode

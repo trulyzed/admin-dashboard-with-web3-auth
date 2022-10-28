@@ -1,3 +1,6 @@
 {
-  "pageTitle": "হোম"
+  "pageTitle": "হোম",
+  "loggedInAs": "লগ ইন করেছেন",
+  "name": "নাম",
+  "email": "ইমেইল"
 }

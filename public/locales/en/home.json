@@ -1,3 +1,6 @@
 {
-  "pageTitle": "Home"
+  "pageTitle": "Home",
+  "loggedInAs": "Logged in as",
+  "name": "Name",
+  "email": "Email"
 }

@@ -34,6 +34,7 @@ const menus: IMenu[] = [
 export const SideMenu = ({ onClose }: ISideMenuProps) => {
   const { push: routerPush, pathname } = useRouter()
   const { translate } = useLocaleTranslation('menu')
+  const { translate: translateCommon } = useLocaleTranslation('common')
   const { logout, loading } = useContext(AuthContext)
 
   const handleLogout = useCallback(() => {
@@ -59,7 +60,7 @@ export const SideMenu = ({ onClose }: ISideMenuProps) => {
             <ListItemIcon>
               <LogoutSharp color="warning" />
             </ListItemIcon>
-            <ListItemText primary={translate('${common.authentication.logout}')} />
+            <ListItemText primary={translateCommon('${authentication.logout}')} />
           </ListItemButton>
         </ListItem>
       </List>
