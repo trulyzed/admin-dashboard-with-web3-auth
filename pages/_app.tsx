@@ -6,7 +6,7 @@ import { useStorage } from '~/hooks/useStorage'
 import { store } from '~/store/store'
 import '~/styles/index.scss'
 
-function DashboardApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const { getData } = useStorage()
   const token = getData('token')
   return (
@@ -18,4 +18,4 @@ function DashboardApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default appWithTranslation(DashboardApp)
+export default appWithTranslation(App)

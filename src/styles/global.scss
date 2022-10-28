@@ -1,3 +1,9 @@
+@import './variables';
+
 body {
+  background-color: azure;
+  &.--dark-mode {
+    background-color: $dark-bg;
+  }
   margin: 0;
 }
