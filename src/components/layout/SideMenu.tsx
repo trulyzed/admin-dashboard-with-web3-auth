@@ -1,11 +1,10 @@
-import { ReactNode } from "react"
-import { useRouter } from "next/router"
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
-import { Inventory2Sharp, ContactPageSharp } from "@mui/icons-material"
+import { ReactNode } from 'react'
+import { useRouter } from 'next/router'
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { Inventory2Sharp, ContactPageSharp } from '@mui/icons-material'
+import { useLocaleTranslation } from '~/hooks/useLocaleParser'
 
-interface ISideMenuProps {
-
-}
+interface ISideMenuProps {}
 
 interface IMenu {
   name: string
@@ -16,39 +15,31 @@ interface IMenu {
 
 const menus: IMenu[] = [
   {
-    name: "Products",
-    key: "productList",
-    path: "/product/list",
+    name: 'Products',
+    key: 'productList',
+    path: '/product/list',
     icon: <Inventory2Sharp />
   },
   {
-    name: "Contacts",
-    key: "contactList",
-    path: "/contact/list",
+    name: 'Contacts',
+    key: 'contactList',
+    path: '/contact/list',
     icon: <ContactPageSharp />
   }
 ]
 
-export const SideMenu = ({
-
-}: ISideMenuProps) => {
-  const {push: routerPush, pathname} = useRouter()
+export const SideMenu = ({}: ISideMenuProps) => {
+  const { push: routerPush, pathname } = useRouter()
+  const { translate } = useLocaleTranslation('menu')
 
   return (
-    <Box
-      sx={{ width: 250 }}
-      role={"presentation"}
-    >
+    <Box sx={{ width: 250 }} role={'presentation'}>
       <List>
-        {menus.map(menu => (
+        {menus.map((menu) => (
           <ListItem key={menu.key} disablePadding>
             <ListItemButton onClick={() => routerPush(menu.path)} selected={menu.path === pathname}>
-              {menu.icon ?
-                <ListItemIcon>
-                  {menu.icon}
-                </ListItemIcon>
-              : null}
-              <ListItemText primary={menu.name} />
+              {menu.icon ? <ListItemIcon>{menu.icon}</ListItemIcon> : null}
+              <ListItemText primary={translate(`\${${menu.name}}`)} />
             </ListItemButton>
           </ListItem>
         ))}

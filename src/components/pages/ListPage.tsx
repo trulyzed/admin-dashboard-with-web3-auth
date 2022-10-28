@@ -12,8 +12,8 @@ interface IListPage {
 }
 
 export const ListPage = ({ title, metaGetter }: IListPage) => {
-  const { columns, storeSlice, tableActions = [], rowActions = [] } = metaGetter()
-  const dataSource = useSelector((state: RootState) => (storeSlice ? state[storeSlice].list : []))
+  const { columns, storeSelector, tableActions = [], rowActions = [], localeSelector } = metaGetter()
+  const dataSource = useSelector((state: RootState) => (storeSelector ? state[storeSelector].list : []))
   const documentTitle = `${title} | Dashboard`
 
   return (
@@ -41,7 +41,7 @@ export const ListPage = ({ title, metaGetter }: IListPage) => {
             {title}
           </Typography>
           {tableActions.map((i, index) => (
-            <DataAction key={index} {...i} />
+            <DataAction key={index} {...i} localeSelector={localeSelector} />
           ))}
         </Paper>
 

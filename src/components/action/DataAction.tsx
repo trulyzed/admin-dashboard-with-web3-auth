@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
 import { IFormMetaGetter } from '~/meta/types'
 import { ModalForm } from '~/components/form/ModalForm'
+import { useLocaleTranslation } from '~/hooks/useLocaleParser'
 
 export interface IDataActionProps {
   actionType: 'CREATE' | 'UPDATE' | 'REMOVE'
@@ -12,11 +13,20 @@ export interface IDataActionProps {
   action: ActionCreatorWithPayload<any>
   context?: Record<string, any>
   formMetaGetter?: IFormMetaGetter
+  localeSelector?: string
 }
 
-export const DataAction = ({ actionType, actionText, action, context, formMetaGetter }: IDataActionProps) => {
+export const DataAction = ({
+  actionType,
+  actionText,
+  action,
+  context,
+  formMetaGetter,
+  localeSelector
+}: IDataActionProps) => {
   const dispatch = useDispatch()
   const [showDialog, setShowDialog] = useState(false)
+  const { translate } = useLocaleTranslation(localeSelector)
 
   let ariaLabel: string
   let icon: ReactNode
@@ -50,7 +60,7 @@ export const DataAction = ({ actionType, actionText, action, context, formMetaGe
           onClick={handleClick}
           color={actionType === 'CREATE' ? 'success' : undefined}
         >
-          {actionText}
+          {translate(actionText)}
         </Button>
       ) : (
         <IconButton onClick={handleClick}>{icon}</IconButton>
@@ -66,6 +76,7 @@ export const DataAction = ({ actionType, actionText, action, context, formMetaGe
             onSubmitSuccess: () => setShowDialog(false),
             defaultValues: context
           }}
+          localeSelector={localeSelector}
         />
       ) : null}
     </>

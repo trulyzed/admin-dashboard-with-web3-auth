@@ -26,11 +26,10 @@ export const productListMetaGetter: IListMetaGetter = () => {
         dataIndex: 'quantity'
       }
     ],
-    storeSlice: 'product',
     tableActions: [
       {
         actionType: 'CREATE',
-        actionText: 'Create Product',
+        actionText: '${list.tableActions.create}',
         formMetaGetter: productFormMetaGetter('CREATE'),
         action: add
       }
@@ -38,6 +37,8 @@ export const productListMetaGetter: IListMetaGetter = () => {
     rowActions: [
       { actionType: 'UPDATE', formMetaGetter: productFormMetaGetter('UPDATE'), action: update },
       { actionType: 'REMOVE', action: remove }
-    ]
+    ],
+    storeSelector: 'product',
+    localeSelector: 'product'
   }
 }

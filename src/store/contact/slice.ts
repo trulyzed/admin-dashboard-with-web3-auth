@@ -8,7 +8,7 @@ export interface ContactState {
 }
 
 const initialState: ContactState = {
-  list: contactList,
+  list: contactList
 }
 
 export const contactSlice = createSlice({
@@ -16,18 +16,21 @@ export const contactSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<IContact>) => {
-      state.list.push(action.payload)
+      state.list = [
+        {
+          id: Date.now(),
+          ...action.payload
+        },
+        ...state.list
+      ]
     },
-    update: (state, action: PayloadAction<{id: string; data: IContact}>) => {
-      let matchedContact = state.list.find(i => i.id === action.payload.id)
-      if (matchedContact) {
-        matchedContact = action.payload.data
-      }
+    update: (state, action: PayloadAction<{ id: string; data: IContact }>) => {
+      state.list = state.list.map((i) => (i.id === action.payload.id ? action.payload.data : i))
     },
     remove: (state, action: PayloadAction<string>) => {
-      state.list = state.list.filter(i => i.id !== action.payload)
-    },
-  },
+      state.list = state.list.filter((i) => i.id !== action.payload)
+    }
+  }
 })
 
 export const { add, update, remove } = contactSlice.actions

@@ -6,9 +6,10 @@ import { RootState } from '~/store/store'
 
 interface IListMeta {
   columns: ITableProps['columns']
-  storeSlice?: keyof RootState
   tableActions?: IDataActionProps[]
   rowActions?: IDataActionProps[]
+  storeSelector?: keyof RootState
+  localeSelector?: string
 }
 
 export interface IListMetaGetter {
@@ -31,6 +32,7 @@ export interface IFormField {
 interface IFormMeta {
   title: ReactNode
   fields: IFormField[]
+  localeSelector?: string
 }
 
 export interface IFormMetaGetter {

@@ -4,7 +4,7 @@ import { add, update } from '~/store/product/slice'
 export const productFormMetaGetter =
   (submitType: 'CREATE' | 'UPDATE'): IFormMetaGetter =>
   () => ({
-    title: `${submitType === 'CREATE' ? 'Create' : 'Update'} Product`,
+    title: submitType === 'CREATE' ? '${form.createTitle}' : '${form.updateTitle}',
     fields: [
       {
         fieldName: 'sku',
@@ -43,5 +43,6 @@ export const productFormMetaGetter =
         required: true
       }
     ],
-    submitAction: submitType === 'CREATE' ? add : update
+    submitAction: submitType === 'CREATE' ? add : update,
+    localeSelector: 'product'
   })

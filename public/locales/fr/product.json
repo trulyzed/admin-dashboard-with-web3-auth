@@ -1,5 +1,13 @@
 {
+  "name": "Produits",
   "list": {
-    "pageTitle": "Titre du produit"
+    "pageTitle": "Liste de produits",
+    "tableActions": {
+      "create": "Créer un produit"
+    }
+  },
+  "form": {
+    "createTitle": "Créer un produit",
+    "updateTitle": "Mettre jour un produit"
   }
 }

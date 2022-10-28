@@ -5,6 +5,7 @@ import { FieldError, SubmitHandler, useForm } from 'react-hook-form'
 import { IFormField } from '~/meta/types'
 import { FieldMetaProcessor } from './FieldMetaProcessor'
 import { useDispatch } from 'react-redux'
+import { useLocaleTranslation } from '~/hooks/useLocaleParser'
 
 export interface IFormProps {
   title: ReactNode
@@ -13,9 +14,18 @@ export interface IFormProps {
   onSubmitSuccess?: () => void
   defaultValues?: Record<string, any>
   onCancel?: () => void
+  localeSelector?: string
 }
 
-export const Form = ({ title, fields, submitAction, onSubmitSuccess, defaultValues, onCancel }: IFormProps) => {
+export const Form = ({
+  title,
+  fields,
+  submitAction,
+  onSubmitSuccess,
+  defaultValues,
+  onCancel,
+  localeSelector
+}: IFormProps) => {
   const {
     control,
     handleSubmit,
@@ -24,6 +34,8 @@ export const Form = ({ title, fields, submitAction, onSubmitSuccess, defaultValu
     defaultValues
   })
   const dispatch = useDispatch()
+  const { translate } = useLocaleTranslation(localeSelector)
+  const { translate: translateCommon } = useLocaleTranslation('common')
 
   const onSubmit: SubmitHandler<Record<string, any>> = (data) => {
     dispatch(submitAction(data))
@@ -34,7 +46,7 @@ export const Form = ({ title, fields, submitAction, onSubmitSuccess, defaultValu
     <Box>
       {typeof title === 'string' ? (
         <Typography variant="h5" sx={{ py: 2 }}>
-          {title}
+          {translate(title)}
         </Typography>
       ) : (
         title
@@ -51,11 +63,11 @@ export const Form = ({ title, fields, submitAction, onSubmitSuccess, defaultValu
         <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
           {onCancel ? (
             <Button onClick={onCancel} variant={'outlined'}>
-              Cancel
+              {translateCommon('${form.cancel}')}
             </Button>
           ) : null}
           <Button type="submit" variant="contained">
-            Submit
+            {translateCommon('${form.submit}')}
           </Button>
         </Box>
       </Box>
