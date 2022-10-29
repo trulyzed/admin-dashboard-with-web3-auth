@@ -41,9 +41,9 @@ const Home: NextPage = () => {
             // variant={'outlined'}
             elevation={1}
           >
-            <Typography variant="h5">{t('loggedInAs')} -</Typography>
+            <Typography variant="h5">{t('loggedInAs')}-</Typography>
             <Divider sx={{ mt: 2 }} />
-            <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column', gap: 1 }}>
               {userInfo.profileImage ? (
                 <Avatar
                   sx={{ mb: 1, width: '100px', height: '100px' }}

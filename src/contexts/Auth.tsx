@@ -13,7 +13,7 @@ interface IAuthContextValue {
   login: () => Promise<void>
   getUserInfo: () => Promise<Partial<UserInfo>>
   logout: () => Promise<void>
-  getBalance: () => Promise<void>
+  getBalance: () => Promise<string>
 }
 
 export const AuthContext = createContext<IAuthContextValue>({
@@ -24,7 +24,7 @@ export const AuthContext = createContext<IAuthContextValue>({
   login: async () => {},
   getUserInfo: async () => Promise.resolve({}),
   logout: async () => {},
-  getBalance: async () => {}
+  getBalance: async () => Promise.resolve('')
 })
 
 interface IAuthProviderProps {
@@ -68,10 +68,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
   }, [])
 
   const login = useCallback(async () => {
-    if (!web3auth) {
-      console.log('web3auth not initialized yet')
-      return
-    }
+    if (!web3auth) return
     setLoading(true)
     const web3authProvider = await web3auth.connect()
     setLoading(false)
@@ -79,10 +76,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
   }, [web3auth])
 
   const getUserInfo = useCallback(async () => {
-    if (!web3auth) {
-      console.log('web3auth not initialized yet')
-      return Promise.resolve({})
-    }
+    if (!web3auth) return Promise.resolve({})
     setLoading(true)
     const user = await web3auth.getUserInfo()
     setLoading(false)
@@ -90,10 +84,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
   }, [web3auth])
 
   const logout = useCallback(async () => {
-    if (!web3auth) {
-      console.log('web3auth not initialized yet')
-      return
-    }
+    if (!web3auth) return
     setLoading(true)
     await web3auth.logout()
     setLoading(false)
@@ -101,13 +92,12 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
   }, [web3auth])
 
   const getBalance = useCallback(async () => {
-    if (!provider) {
-      console.log('provider not initialized yet')
-      return
-    }
+    if (!provider) return ''
     const rpc = new RPC(provider)
+    setLoading(true)
     const balance = await rpc.getBalance()
-    console.log(balance)
+    setLoading(false)
+    return balance
   }, [provider])
 
   return (

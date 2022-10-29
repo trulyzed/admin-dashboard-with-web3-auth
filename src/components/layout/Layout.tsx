@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useContext, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { Container, Drawer } from '@mui/material'
 import { SideMenu } from './SideMenu'
 import { Navbar } from './Navbar'
