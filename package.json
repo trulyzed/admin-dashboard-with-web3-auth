@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "start": "next dev",
-    "run": "next start",
+    "dev": "next dev",
+    "start": "yarn dev",
+    "serve": "yarn build && next start",
     "test": "jest --watch",
     "lint": "next lint --max-warnings 0"
   },
