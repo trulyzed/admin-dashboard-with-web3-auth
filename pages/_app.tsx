@@ -6,6 +6,7 @@ import { Layout } from '~/components/layout/Layout'
 import { store } from '~/store/store'
 import '~/styles/index.scss'
 import { AuthProvider } from '~/contexts/Auth'
+import { ThemeProvider } from '~/contexts/Theme'
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,9 +17,11 @@ function App({ Component, pageProps }: AppProps) {
           <meta name="description" content="Dashboard web application" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ThemeProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </AuthProvider>
     </Provider>
   )

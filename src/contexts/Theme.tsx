@@ -1,5 +1,5 @@
 import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material'
-import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import { createContext, ReactNode, useCallback, useMemo, useState } from 'react'
 
 export type ThemeMode = 'light' | 'dark'
 
@@ -33,16 +33,6 @@ export const ThemeProvider = ({ children }: IThemeProviderProps) => {
       }),
     [mode]
   )
-
-  useEffect(() => {
-    const className = '--dark-mode'
-    if (mode === 'dark') document.body.classList.add(className)
-    else document.body.classList.remove(className)
-
-    return () => {
-      document.body.classList.remove(className)
-    }
-  }, [mode])
 
   return (
     <ThemeContext.Provider
