@@ -38,8 +38,9 @@ To run tests
 
  - The application is built with [Next.js](https://nextjs.org/). The application requires a node environment to run
  - Node version used: **v16.18.0**
- - This application can both be deployed in [SGS](https://nextjs.org/docs/advanced-features/static-html-export) and **SSR** modes
+ - Environment variables are listed in **.env** file
  - Official deployment instructions can be found [here](https://nextjs.org/docs/deployment)
  - Dockerization example file can be found [here](https://github.com/vercel/next.js/tree/canary/examples/with-docker)
+ - In order to get `NEXT_PUBLIC_WEB3AUTH_CLIENT_ID` environment variable value, register a project in [web3auth](https://web3auth.io/), convert project to `mainnet` or `cyan`. 
  - For SGS build, it is better to serve build files through a CDN for better performance
 

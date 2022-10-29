@@ -3,7 +3,7 @@ import { Web3Auth } from '@web3auth/modal'
 import { CHAIN_NAMESPACES, SafeEventEmitterProvider, UserInfo } from '@web3auth/base'
 import RPC from '~/web3RPC'
 
-const clientId = 'BHVRAW2XCuOzyjPJQ1TTSbKOWs5T10vJnJKfiSnm3_dtfpfewyx9Wg49WqEIKICgqzMvzV_lGkAwS1aDp8NpHwY'
+const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID!
 
 interface IAuthContextValue {
   initializing: boolean
