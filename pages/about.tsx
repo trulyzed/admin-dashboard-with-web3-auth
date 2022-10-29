@@ -27,30 +27,23 @@ const About: NextPage = () => {
         </Box>
         <Box sx={{ mt: 3 }}>
           <Typography variant="h3" fontWeight={800} fontFamily={'cursive'}>
-            Borderless Payments, for everyone
+            {t('slogan')}
           </Typography>
         </Box>
       </Paper>
       <Paper sx={{ mt: 2, p: 4 }} elevation={0}>
         <Box sx={{ mt: 1 }}>
           <Typography variant="h6" fontWeight={800} className={'wind--text'} fontFamily={'monospace'}>
-            Making sense of Wind
+            {t('title')}
           </Typography>
           <Divider sx={{ mt: 1 }} />
         </Box>
         <Box sx={{ mt: 4 }}>
           <Typography variant="subtitle1" fontFamily={'cursive'}>
-            Wind is a Fintech application. A cross-border payment solution to exchange money around the world. Unlike
-            traditional payment providers, Wind will not have strict control over users&apos; money. It will do
-            everything a traditional payment application does plus more (common features like add money, send money,
-            cash out, etc and also crypto functionalities like staking, yield in decentralized way). In the Wind wallet,
-            passive income is possible through staking and expanding crypto assets in DeFi apps.
+            {t('description1')}
           </Typography>
           <Typography variant="subtitle1" fontFamily={'cursive'} sx={{ mt: 2 }}>
-            Wind as a company is focused on developing the Wind payment application backed by the marquee investors with
-            deep experiences in Crypto and Fintech. The founders of the company have solid track records of making
-            startups successful. This is a team of designers, engineers, and founders with a view to making borderless
-            payments cheap, accessible, and hassle-free.
+            {t('description2')}
           </Typography>
         </Box>
       </Paper>
