@@ -1,6 +1,6 @@
 import { IListMetaGetter } from '~/meta/types'
 import { add, remove, update } from '~/store/product/slice'
-import { productFormMetaGetter } from '../formMeta/product'
+import { productFormMetaGetter } from '~/meta/formMeta/product'
 
 export const productListMetaGetter: IListMetaGetter = () => {
   return {

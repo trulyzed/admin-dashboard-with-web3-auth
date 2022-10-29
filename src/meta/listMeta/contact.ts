@@ -1,6 +1,6 @@
 import { IListMetaGetter } from '~/meta/types'
 import { add, remove, update } from '~/store/contact/slice'
-import { contactFormMetaGetter } from '../formMeta/contact'
+import { contactFormMetaGetter } from '~/meta/formMeta/contact'
 
 export const contactListMetaGetter: IListMetaGetter = () => {
   return {

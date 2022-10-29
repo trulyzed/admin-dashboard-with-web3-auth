@@ -1,7 +1,7 @@
 import { ReactNode, useCallback, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import { Inventory2Sharp, ContactPageSharp, LogoutSharp, InfoSharp } from '@mui/icons-material'
+import { Inventory2Sharp, ContactPageSharp, ShoppingBagSharp, LogoutSharp, InfoSharp } from '@mui/icons-material'
 import { useLocaleTranslation } from '~/hooks/useLocaleParser'
 import { AuthContext } from '~/contexts/Auth'
 
@@ -28,6 +28,12 @@ const menus: IMenu[] = [
     key: 'contactList',
     path: '/contact/list',
     icon: <ContactPageSharp color={'primary'} />
+  },
+  {
+    name: 'Orders',
+    key: 'orderList',
+    path: '/order/list',
+    icon: <ShoppingBagSharp color={'primary'} />
   },
   {
     name: 'About',
